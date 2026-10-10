@@ -1,0 +1,29 @@
+{
+  "name": "aurvynt-2026",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AURVYNT 2026 — FRESHERS × FAREWELL official invitation website",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "generate-qr": "node scripts/generate-qr.mjs"
+  },
+  "dependencies": {
+    "framer-motion": "^12.0.0",
+    "html2canvas": "^1.4.1",
+    "lucide-react": "^0.525.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.3.5"
+  }
+}
