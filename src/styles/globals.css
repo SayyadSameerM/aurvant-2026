@@ -1,0 +1,113 @@
+/* ============================================================
+   AURVYNT 2026 — Global Design Tokens & Cinematic Layout
+   ============================================================ */
+
+:root {
+  --cyan: #00f0ff;
+  --cyan-dim: #00c8cc;
+  --magenta: #ff2d9b;
+  --purple: #bf5fff;
+  --gold: #ffd700;
+  --amber: #ff9500;
+  --green: #00ff88;
+  --orange: #ff6b35;
+
+  --bg-void: #000408;
+  --bg-deep: #020812;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.75);
+  --text-muted: rgba(255,255,255,0.45);
+
+  --font-display: "Exo 2", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* ── Reset ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;        /* THE KEY — no scroll whatsoever */
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent any accidental scroll bleed */
+body { overscroll-behavior: none; }
+
+/* ── Full-screen stage ─────────────────────────── */
+.stage {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Scene wrapper ─────────────────────────────── */
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Focus ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Selection ─────────────────────────────────── */
+::selection {
+  background: rgba(0, 240, 255, 0.25);
+  color: #fff;
+}
+
+/* ── Scrollbar hidden (belt + suspenders) ──────── */
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+/* ── Helpers ───────────────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Print ─────────────────────────────────────── */
+@media print {
+  body { background: #fff !important; color: #000 !important; overflow: visible !important; }
+  .no-print { display: none !important; }
+}
+
+/* ── Reduced motion ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
