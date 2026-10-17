@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import html2canvas from "html2canvas";
 import { EVENT } from "../../config/event";
 import type { UseSceneEngineReturn } from "../../hooks/useSceneEngine";
+import FireworksCelebration from "../FireworksCelebration";
 
 interface Props {
   elapsed: number;
@@ -202,13 +203,16 @@ export default function Scene7Finale({ elapsed, engine }: Props) {
         />
       ))}
 
+      {/* Fireworks & Celebration Canvas */}
+      <FireworksCelebration isActive={isCut} />
+
       {/* Welcome State (After Cut) */}
       <AnimatePresence>
         {isCut && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, filter: "blur(20px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+            transition={{ duration: 1.5, delay: 0.4, ease: "easeOut" }}
             style={{
               position: "absolute",
               inset: 0,
@@ -217,7 +221,8 @@ export default function Scene7Finale({ elapsed, engine }: Props) {
               alignItems: "center",
               justifyContent: "center",
               zIndex: 30,
-              textAlign: "center"
+              textAlign: "center",
+              padding: "20px",
             }}
           >
             {/* Cut particles */}
@@ -242,11 +247,42 @@ export default function Scene7Finale({ elapsed, engine }: Props) {
               />
             ))}
 
+            {/* Celebratory VIP Badge */}
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2, type: "spring", stiffness: 220 }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "6px 16px",
+                borderRadius: "100px",
+                background: "rgba(255, 215, 0, 0.12)",
+                border: "1px solid rgba(255, 215, 0, 0.4)",
+                boxShadow: "0 0 20px rgba(255, 215, 0, 0.25)",
+                marginBottom: "14px",
+              }}
+            >
+              <span>🎉</span>
+              <span style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(9px, 1.3vw, 11px)",
+                fontWeight: 800,
+                letterSpacing: "0.2em",
+                color: "#ffd700",
+                textShadow: "0 0 10px rgba(255, 215, 0, 0.5)"
+              }}>
+                CELEBRATION UNLOCKED · OFFICIAL VIP
+              </span>
+              <span>✨</span>
+            </motion.div>
+
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <svg width="60" height="48" viewBox="0 0 80 64" fill="none" style={{ filter: "drop-shadow(0 0 20px #00f0ff) drop-shadow(0 0 40px rgba(191,95,255,0.6))", marginBottom: "20px" }}>
+              <svg width="60" height="48" viewBox="0 0 80 64" fill="none" style={{ filter: "drop-shadow(0 0 20px #00f0ff) drop-shadow(0 0 40px rgba(191,95,255,0.6))", marginBottom: "16px" }}>
                 <defs>
                   <linearGradient id="wel-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#00f0ff"/><stop offset="50%" stopColor="#fff"/><stop offset="100%" stopColor="#ff2d9b"/>
@@ -262,7 +298,7 @@ export default function Scene7Finale({ elapsed, engine }: Props) {
               fontFamily: "var(--font-display)", fontWeight: 900,
               fontSize: "clamp(1.5rem, 5vw, 3rem)",
               color: "#fff",
-              textShadow: "0 0 20px rgba(0, 240, 255, 0.5)",
+              textShadow: "0 0 20px rgba(0, 240, 255, 0.6), 0 0 40px rgba(191, 95, 255, 0.3)",
               marginBottom: "8px",
               lineHeight: 1.1,
               maxWidth: "800px"
@@ -273,9 +309,9 @@ export default function Scene7Finale({ elapsed, engine }: Props) {
             <p style={{
               fontFamily: "var(--font-display)", fontWeight: 700,
               fontSize: "clamp(1rem, 3vw, 1.5rem)",
-              background: "linear-gradient(135deg, #00f0ff, #bf5fff)",
+              background: "linear-gradient(135deg, #00f0ff, #fff, #bf5fff)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-              marginBottom: "20px",
+              marginBottom: "16px",
               letterSpacing: "0.1em"
             }}>
               {ticketName.trim() ? "YOU'RE PART OF THE STORY NOW." : "YOUR NEXT UNFORGETTABLE MEMORY STARTS HERE."}
@@ -284,24 +320,43 @@ export default function Scene7Finale({ elapsed, engine }: Props) {
             <p style={{
               fontFamily: "var(--font-display)", fontStyle: "italic",
               fontSize: "clamp(0.8rem, 2vw, 1rem)",
-              color: "rgba(255, 215, 0, 0.8)",
+              color: "rgba(255, 215, 0, 0.85)",
               letterSpacing: "0.08em",
-              marginBottom: "40px"
+              marginBottom: "32px",
+              textShadow: "0 0 10px rgba(255, 215, 0, 0.3)"
             }}>
               "Three Sciences. Two Generations. One Legacy."
             </p>
 
-            <div style={{ display: "flex", gap: "clamp(12px, 2vw, 20px)", justifyContent: "center", flexWrap: "wrap" }}>
-              <button onClick={handleDownload} disabled={exporting} style={btnStyle("#00f0ff", "rgba(0,240,255,0.1)")}>
+            <div style={{ display: "flex", gap: "clamp(12px, 2vw, 20px)", justifyContent: "center", flexWrap: "wrap", zIndex: 35 }}>
+              <button onClick={handleDownload} disabled={exporting} style={btnStyle("#00f0ff", "rgba(0,240,255,0.15)")}>
                 {exporting ? "SAVING..." : "⬇ SAVE TICKET"}
               </button>
-              <button onClick={handleShare} style={btnStyle("#ffd700", "rgba(255,215,0,0.1)")}>
+              <button onClick={handleShare} style={btnStyle("#ffd700", "rgba(255,215,0,0.15)")}>
                 {copied ? "✓ COPIED!" : "📤 SHARE INVITATION"}
               </button>
-              <button onClick={resetExperience} style={btnStyle("rgba(255,255,255,0.7)", "rgba(255,255,255,0.05)")}>
+              <button onClick={resetExperience} style={btnStyle("rgba(255,255,255,0.8)", "rgba(255,255,255,0.08)")}>
                 ↺ REPLAY EXPERIENCE
               </button>
             </div>
+
+            {/* Interactive fireworks tap prompt */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.4, 0.9, 0.4] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(8px, 1.2vw, 11px)",
+                letterSpacing: "0.15em",
+                color: "rgba(0, 240, 255, 0.8)",
+                marginTop: "24px",
+                textShadow: "0 0 10px rgba(0, 240, 255, 0.4)",
+                pointerEvents: "none"
+              }}
+            >
+              ✨ TAP ANYWHERE ON SCREEN TO LAUNCH FIREWORKS ✨
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>

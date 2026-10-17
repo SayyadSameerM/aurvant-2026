@@ -77,6 +77,8 @@ function RingBurst() {
             position: "absolute",
             borderRadius: "50%",
             border: `1.5px solid ${["#00f0ff", "#bf5fff", "#ff2d9b", "#ffd700"][i]}`,
+            boxShadow: `0 0 25px ${["#00f0ff", "#bf5fff", "#ff2d9b", "#ffd700"][i]}40`,
+            opacity: 0.5,
           }}
         />
       ))}
@@ -87,12 +89,12 @@ function RingBurst() {
 // Laser beam SVG
 function LaserBeams() {
   const beams = [
-    { x2: "10%", color: "rgba(0,240,255,0.2)" },
-    { x2: "30%", color: "rgba(191,95,255,0.15)" },
-    { x2: "50%", color: "rgba(0,240,255,0.12)" },
-    { x2: "70%", color: "rgba(255,45,155,0.12)" },
-    { x2: "90%", color: "rgba(191,95,255,0.15)" },
-    { x2: "100%", color: "rgba(0,240,255,0.2)" },
+    { x2: "10%", color: "rgba(0, 240, 255, 0.22)" },
+    { x2: "25%", color: "rgba(191, 95, 255, 0.20)" },
+    { x2: "40%", color: "rgba(0, 240, 255, 0.18)" },
+    { x2: "60%", color: "rgba(255, 45, 155, 0.20)" },
+    { x2: "75%", color: "rgba(191, 95, 255, 0.20)" },
+    { x2: "90%", color: "rgba(0, 240, 255, 0.22)" },
   ];
   return (
     <svg
@@ -106,7 +108,7 @@ function LaserBeams() {
           key={i}
           x1="50" y1="100" x2={b.x2} y2="0"
           stroke={b.color}
-          strokeWidth="0.4"
+          strokeWidth="0.6"
           initial={{ opacity: 0, pathLength: 0 }}
           animate={{ opacity: 1, pathLength: 1 }}
           transition={{ duration: 1.5, delay: 0.8 + i * 0.15, ease: "easeOut" }}
@@ -114,7 +116,7 @@ function LaserBeams() {
       ))}
       <motion.ellipse
         cx="50" cy="98" rx="40" ry="8"
-        fill="rgba(0,240,255,0.04)"
+        fill="rgba(0,240,255,0.08)"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}
@@ -133,7 +135,7 @@ export default function Scene1Awakening(_props: Props) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        background: "radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0,10,40,0.8) 0%, rgba(0,4,12,0.95) 60%, #000408 100%)",
+        background: "radial-gradient(ellipse 100% 80% at 50% 50%, rgba(0, 20, 50, 0.95) 0%, rgba(0, 5, 20, 0.98) 55%, #000408 100%)",
       }}
     >
       <LaserBeams />
@@ -150,7 +152,7 @@ export default function Scene1Awakening(_props: Props) {
           const spread = (i / 7) * 0.9;
           return (
             <motion.line key={`h${i}`} x1={50 - 50 * spread} y1={y} x2={50 + 50 * spread} y2={y}
-              stroke="rgba(0,240,255,0.05)" strokeWidth="0.3"
+              stroke="rgba(0, 240, 255, 0.18)" strokeWidth="0.3"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 + i * 0.06 }}
             />
@@ -158,7 +160,7 @@ export default function Scene1Awakening(_props: Props) {
         })}
         {Array.from({ length: 11 }, (_, i) => (
           <motion.line key={`v${i}`} x1="50" y1="0" x2={i * 10} y2="40"
-            stroke="rgba(0,240,255,0.04)" strokeWidth="0.3"
+            stroke="rgba(0, 240, 255, 0.12)" strokeWidth="0.3"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 + i * 0.04 }}
           />
@@ -175,7 +177,7 @@ export default function Scene1Awakening(_props: Props) {
         {/* Pulsing energy glow under title */}
         <motion.div
           initial={{ opacity: 0, scale: 0.2 }}
-          animate={{ opacity: [0, 0.6, 0.3], scale: [0.2, 1.5, 1] }}
+          animate={{ opacity: [0, 0.7, 0.35], scale: [0.2, 1.5, 1] }}
           transition={{ duration: 1.2, delay: 1.6 }}
           aria-hidden="true"
           style={{
@@ -185,8 +187,8 @@ export default function Scene1Awakening(_props: Props) {
             transform: "translate(-50%,-50%)",
             width: "min(500px, 80vw)",
             height: "120px",
-            background: "radial-gradient(ellipse, rgba(0,240,255,0.25) 0%, transparent 70%)",
-            filter: "blur(20px)",
+            background: "radial-gradient(ellipse, rgba(0,240,255,0.4) 0%, rgba(191,95,255,0.2) 50%, transparent 70%)",
+            filter: "blur(25px)",
             pointerEvents: "none",
           }}
         />
@@ -204,10 +206,11 @@ export default function Scene1Awakening(_props: Props) {
               fontSize: "clamp(3.5rem, 14vw, 9rem)",
               letterSpacing: "-0.02em",
               lineHeight: 0.88,
-              background: "linear-gradient(135deg, #00f0ff 0%, #ffffff 35%, #bf5fff 65%, #ff2d9b 100%)",
+              background: "linear-gradient(135deg, #00f0ff 0%, #ffffff 40%, #bf5fff 70%, #ff2d9b 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
+              textShadow: "0 0 40px rgba(0, 240, 255, 0.5), 0 0 80px rgba(191, 95, 255, 0.3)",
               marginBottom: "4px",
             }}
           >
@@ -227,7 +230,7 @@ export default function Scene1Awakening(_props: Props) {
               fontWeight: 900,
               fontSize: "clamp(2rem, 8vw, 5.5rem)",
               color: "#ffd700",
-              textShadow: "0 0 30px rgba(255,215,0,0.6), 0 0 80px rgba(255,215,0,0.25)",
+              textShadow: "0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3)",
             }}
           >
             2026
@@ -242,9 +245,10 @@ export default function Scene1Awakening(_props: Props) {
           style={{
             marginTop: "16px",
             fontFamily: "var(--font-display)",
-            fontWeight: 300,
-            fontSize: "clamp(0.85rem, 2.5vw, 1.1rem)",
-            color: "rgba(255,255,255,0.5)",
+            fontWeight: 700,
+            fontSize: "clamp(0.85rem, 2.5vw, 1.2rem)",
+            color: "#00f0ff",
+            textShadow: "0 0 15px rgba(0, 240, 255, 0.6)",
             letterSpacing: "0.25em",
           }}
         >
@@ -261,7 +265,8 @@ export default function Scene1Awakening(_props: Props) {
             fontFamily: "var(--font-display)",
             fontWeight: 400,
             fontSize: "clamp(0.75rem, 2vw, 0.95rem)",
-            color: "rgba(255,255,255,0.35)",
+            color: "rgba(255, 215, 0, 0.85)",
+            textShadow: "0 0 10px rgba(255, 215, 0, 0.3)",
             letterSpacing: "0.08em",
             fontStyle: "italic",
           }}
